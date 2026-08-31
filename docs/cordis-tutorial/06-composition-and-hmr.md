@@ -65,9 +65,12 @@ The flip side of dependency-driven loading: a plugin whose `inject` names a serv
 You can see the states directly. Every context can enumerate the plugin registry; create `diagnose.ts`:
 
 ```ts
-import { FiberState, type Context } from '@deepseek-ai/cordis'
+import type { Context, FiberState as FiberStateEnum } from '@deepseek-ai/cordis'
 
 export const name = 'diagnose'
+
+// FiberState is a const enum: TypeScript inlines it and the published JS has no export.
+const FiberState = { PENDING: 0 as FiberStateEnum.PENDING }
 
 export function apply(ctx: Context) {
   setTimeout(() => {

@@ -65,9 +65,12 @@ hello from my EDITED plugin
 你可以直接查看这些状态。每个上下文都能枚举插件注册表；创建 `diagnose.ts`：
 
 ```ts
-import { FiberState, type Context } from '@deepseek-ai/cordis'
+import type { Context, FiberState as FiberStateEnum } from '@deepseek-ai/cordis'
 
 export const name = 'diagnose'
+
+// FiberState is a const enum: TypeScript inlines it and the published JS has no export.
+const FiberState = { PENDING: 0 as FiberStateEnum.PENDING }
 
 export function apply(ctx: Context) {
   setTimeout(() => {

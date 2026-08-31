@@ -20,11 +20,13 @@ cd deepseek-harness
 pnpm install
 ```
 
-Create the scratch directory the chapters work in. `tmp/` is gitignored, so nothing you write there touches version control:
+Create the scratch directory the chapters work in. `tmp/` is gitignored, so nothing you write there touches version control. Copy the scratch `package.json` and `tsconfig.json` so the editor can resolve `@deepseek-ai/cordis` (and later tutorial packages) without joining the monorepo TypeScript graph, then install those links outside the workspace:
 
 ```sh
 mkdir -p tmp/cordis-tutorial
+cp docs/cordis-tutorial/scratch/package.json docs/cordis-tutorial/scratch/tsconfig.json tmp/cordis-tutorial/
 cd tmp/cordis-tutorial
+pnpm install --ignore-workspace
 ```
 
 Every chapter runs the same command from this directory:
@@ -33,7 +35,7 @@ Every chapter runs the same command from this directory:
 node --import tsx ../../vendor/cordis/bin.js
 ```
 
-That one-file launcher (see [vendor/cordis/bin.js](../../vendor/cordis/bin.js)) creates a root `Context`, mounts the Loader plugin, and tells it to load `./cordis.yml` from the current directory. Everything else — which plugins exist, how they are configured — comes from that YAML file, which you will write in a moment. The `--import tsx` flag lets Node run the TypeScript files the config points at without a build step.
+That one-file launcher (see [vendor/cordis/bin.js](../../vendor/cordis/bin.js)) creates a root `Context`, mounts the Loader plugin, and tells it to load `./cordis.yml` from the current directory. Everything else — which plugins exist, how they are configured — comes from that YAML file, which you will write in a moment. The `--import tsx` flag lets Node run the TypeScript files the config points at without a build step. The scratch `package.json` also supplies the launcher plugins that `tsx` resolves from this directory once a local `tsconfig.json` is present.
 
 ## Chapters
 

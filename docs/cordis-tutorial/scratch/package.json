@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@deepseek-ai/cordis": "link:../../vendor/cordis",
+    "@deepseek-ai/cordis-plugin-loader": "link:../../vendor/loader",
+    "@deepseek-ai/cordis-plugin-include": "link:../../vendor/include",
+    "@deepseek-ai/schemastery": "link:../../vendor/schemastery",
+    "@deepseek-ai/cordis-plugin-timer": "link:../../vendor/timer",
+    "@deepseek-ai/cordis-plugin-hmr": "link:../../vendor/hmr",
+    "@deepseek-ai/cordis-plugin-logger-console": "link:../../vendor/logger-console",
+    "@deepseek-ai/dsh-tools": "link:../../packages/core/tools",
+    "@deepseek-ai/dsh-llm": "link:../../packages/llm/llm",
+    "@deepseek-ai/dsh-system-prompt": "link:../../packages/core/system-prompt"
+  }
+}

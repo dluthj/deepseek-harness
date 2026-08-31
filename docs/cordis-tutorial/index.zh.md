@@ -22,11 +22,13 @@ cd deepseek-harness
 pnpm install
 ```
 
-创建各章使用的临时目录。`tmp/` 已被 git 忽略，因此你在其中写入的任何内容都不会进入版本控制：
+创建各章使用的临时目录。`tmp/` 已被 git 忽略，因此你在其中写入的任何内容都不会进入版本控制。复制 scratch 的 `package.json` 与 `tsconfig.json`，让编辑器能解析 `@deepseek-ai/cordis`（以及后续教程用到的包）而又不加入 monorepo 的 TypeScript 工程图，再在工作区外安装这些 link：
 
 ```sh
 mkdir -p tmp/cordis-tutorial
+cp docs/cordis-tutorial/scratch/package.json docs/cordis-tutorial/scratch/tsconfig.json tmp/cordis-tutorial/
 cd tmp/cordis-tutorial
+pnpm install --ignore-workspace
 ```
 
 每一章都从该目录运行同一条命令：
@@ -35,7 +37,7 @@ cd tmp/cordis-tutorial
 node --import tsx ../../vendor/cordis/bin.js
 ```
 
-这个单文件启动器（见 [vendor/cordis/bin.js](../../vendor/cordis/bin.js)）会创建根 `Context`、挂载 Loader 插件，并让它从当前目录加载 `./cordis.yml`。其余所有内容，包括有哪些插件以及如何配置它们，都来自你稍后将编写的 YAML 文件。`--import tsx` 标志让 Node 无需构建步骤即可运行配置所指向的 TypeScript 文件。
+这个单文件启动器（见 [vendor/cordis/bin.js](../../vendor/cordis/bin.js)）会创建根 `Context`、挂载 Loader 插件，并让它从当前目录加载 `./cordis.yml`。其余所有内容，包括有哪些插件以及如何配置它们，都来自你稍后将编写的 YAML 文件。`--import tsx` 标志让 Node 无需构建步骤即可运行配置所指向的 TypeScript 文件。本地一旦有 `tsconfig.json`，`tsx` 就会从本目录解析模块；scratch 的 `package.json` 同时提供了启动器所需的插件 link。
 
 ## 章节
 
